@@ -55,7 +55,7 @@
     
 
     
-        <link rel="stylesheet" href="https://blog.cychen.xyz/css/style.min.8b6516b56bc46ed8621ff4302922cad70856a91a9ea3c199b91d5067b60213d1.css" integrity="sha256-i2UWtWvEbthiH/QwKSLK1whWqRqeo8GZuR1QZ7YCE9E=">
+        <link rel="stylesheet" href="https://blog.cychen.xyz/css/style.min.82e1632505b3c2656f87b929f00e503634513649b276db300374039f6392cca8.css" integrity="sha256-guFjJQWzwmVvh7kp8A5QNjRRNkmydtswA3QDn2OSzKg=">
     
 
 
@@ -137,6 +137,29 @@
         
     </nav>
 
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 
 
