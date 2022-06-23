@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Notes on Model Checking, No. 1 - Chuyang Chen&#39;s Blog</title>
+
+<meta name="description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking.">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://blog.cychen.xyz/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://blog.cychen.xyz/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://blog.cychen.xyz/css/style.min.4c7cf4ba8d70e7f7794a1e298b23f12ed8053f32f431a33f6a3f13e2516dbcce.css" integrity="sha256-THz0uo1w5/d5Sh4piyPxLtgFPzL0MaM/aj8T4lFtvM4=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://blog.cychen.xyz/js/script.min.766e48fac645ce89febc4e3a78467b3c44aed2452453b409fa47401ebe483365.js" type="text/javascript" charset="utf-8" integrity="sha256-dm5I&#43;sZFzon&#43;vE46eEZ7PESu0kUkU7QJ&#43;kdAHr5IM2U="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1" />
+<meta property="og:description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-18T10:37:28+08:00" />
+<meta property="article:modified_time" content="2022-06-18T10:37:28+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1"/>
+<meta name="twitter:description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking."/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">Chuyang Chen&#39;s Blog</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://blog.cychen.xyz/about/" title="About">About</a>
+        
+        <a class="" href="https://blog.cychen.xyz/categories/" title="Categories">Categories</a>
+        
+        <a class="" href="https://blog.cychen.xyz/tags/" title="Tags">Tags</a>
+        
+        <a class="" href="https://blog.cychen.xyz/posts/" title="Archive">Archive</a>
+        
+    </nav>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title draft">Notes on <i>Model Checking</i>, No. 1</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <p>When I picked up Clarke et al.&rsquo;s <em>Model Checking</em>, I&rsquo;d heard the name of model checking for a long. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in <a href="https://en.wikipedia.org/wiki/Model_theory">model theory</a>, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.</p>
+<h2 id="a-glimpse-at-models-in-model-theory" >A Glimpse at Models in Model Theory
+<span>
+    <a href="#a-glimpse-at-models-in-model-theory">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>Before introducing model checking, let&rsquo;s have a glimpse at models in model theory. Informally, a model is an assignment to <em>vocabularies</em> in a logical formula. It stipulates the <em>meaning</em> of these vocabularies and thus the whole formula. We can only discuss the truth value of a logical formula respecting a model. For instance, suppose we have a first-order formula $$\forall v.(\mathrm{even}(v)\vee\mathrm{odd}(v))$$ Without further clarification, we don&rsquo;t know what it means: for example, what can $v$ be? If the one who gives the formula details that $v$ can range in all natural numbers, then in this model, the formula is &ldquo;true&rdquo;; otherwise, if $v$ ranges in rational numbers, it is not true. If a model $\mathfrak{M}$ makes a formula $f$ true, we denote it as $\mathfrak{M}\models f$, read as &ldquo;$\mathfrak{M}$ satisfies $f$&rdquo; or &ldquo;$\mathfrak{M}$ models $f$.&rdquo;</p>
+<h2 id="from-model-theory-to-model-checking" >From Model Theory to Model Checking
+<span>
+    <a href="#from-model-theory-to-model-checking">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>The relation between model theory and model checking is somewhat like the relation between economics and finance (I&rsquo;m not a professional in business disciplines; let me know if you have any better analog). We can intuitively explain this analog by typical questions researchers of model theory and model checking may ask. A model theory researcher may ask: &ldquo;Does there exist <em>any</em> model satisfying this formula?&rdquo;; a model checking researcher may ask: &ldquo;Does this <em>specific</em> model satisfy this formula?&rdquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> In this article, we focus on the latter questions since the topic is about model checking.</p>
+<p>But wait! Why do we need to do that? Why do we want to know whether one specific model satisfies a formula? It is because we don&rsquo;t put any constraint on the elements in a model. Although, in the above example, elements the model contains are natural numbers or rational numbers, they don&rsquo;t have to be such arithmetic objects. They can be, say, components of a computer program; in turn, the model represents a whole computer program. Also, we don&rsquo;t put any constraints on the logic used to write the formula. It doesn&rsquo;t have to be first-order logic but can be something more expressive. It can be <a href="https://en.wikipedia.org/wiki/Temporal_logic">temporal logic</a> that can describe time. Now, look at what we have: we have a model representing a program and a formula describing time-dependent properties. Boom! We find a way to describe the behavior of a program: the model depicts the program, and the logical formula is the condition it must meet when running (when a program starts to run, its <em>time</em> begins). When a model $\mathfrak{M}$ representing a program $\mathfrak{P}$ satisfies a formula $f$ describing a property $p$, we know that the program $\mathfrak{P}$ has the property $p$.</p>
+<h2 id="the-models-used-in-model-checking" ><em>The</em> Models Used in Model Checking
+<span>
+    <a href="#the-models-used-in-model-checking">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>Model checking selects Kripke structures<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> among many choices to represent programs. A Kripke structure is an annotated directed graph that describes a <em>transition system</em>, that is, a system with discrete states and transitions between these states. An example is as follows.</p>
+<p><img src="1-1.svg" alt="An example of Kripke structures"></p>
+<p>The above Kripke structure has three states, $S_1$, $S_2$, and $S_3$, and four transitions, $S_1\rightarrow S_2$, $S_1\rightarrow S_3$, $S_2\rightarrow S_3$, and $S_3\rightarrow S_3$. $a$, $b$, and $c$ are attributes of the states on which the logical formula may make assertions. Possible execution of the system may be $S_1, S_2, S_3, S_3, &hellip;$ Some important points of Kripke structures:</p>
+<ol>
+<li>The number of states and transitions needs to be finite.</li>
+<li>There can be multiple outedges from one state, giving Kripke structures the ability to handle <a href="https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine">nondeterminism</a> naturally.</li>
+<li>Some states should be marked as <em>initial states</em> (characterized by an inedge without a tail), from which the system&rsquo;s execution begins. In the above example, $S_1$ is the only initial state.</li>
+<li>There can be self-loops, where a state has an outedge pointing itself. In a self-loop, the system may stay in the self-looped state forever.</li>
+</ol>
+<p>Moreover, model checking imposes an extra constraint on the Kripke structures: every state must have at least one outedge. It means that once the system starts executing, it can never stop. One can easily modify a Kripke structure with <em>halt states</em> (states with no outedges, so the execution can only halt) to this form by just adding self-loops to all halt states.</p>
+<p>Characteristics of Kripke structures restrict the ability of model checking: model checking cannot check any program with infinite states<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, for example, programs dealing with variable-length strings. However, this is a sensible trade-off between the expressiveness and the simplicity of computing: no computer can represent an arbitrary infinite graph, let alone calculate assertions on it.</p>
+<p>Hitherto, we have given a synopsis of the concepts of models in model theory and model checking. In the next post, we will touch another core concept in model checking—the left-hand side of the notation $\mathfrak{M}\models f$—logical formulas in model checking.</p>
+<p>However, before we conclude this post, we have to supplement a slight difference between <em>the</em> models in model checking and models in model theory: the former cannot be strictly subsumed into the latter. As to be detailed in the next post, logical formulas in model checking can only assert properties upon a <em>state</em>. We cannot say $\mathfrak{M}\models f$, but instead $\mathfrak{M},s\models f$, where $\mathfrak{M}$ is a Kripke structure, $f$ is a formula, and $s$ is a state of $\mathfrak{M}$. That means the equivalent of models in model theory in model checking is Kripke structures plus one of their states. Still, due to conventional reasons, researchers of model checking simply refer to Kripke structures as &ldquo;models,&rdquo; and we will follow this convention hereafter. Typically, we only check the initial states of a Kripke structure against some formula $f$ because all successive states of these initial states can be specified by this formula through temporal quantifiers. The unreachable states from the initial states do not affect the system&rsquo;s actual behavior. So, you will see a lot of seemingly model theory equations $\mathfrak{M}\models f$ in model checking, while according to the preceding paragraph, it is illegal in model theory. Remember, in model checking, such an equation is just an abbreviation of $$\bigwedge_{s\in\mathrm{initialStatesOf}(\mathfrak{M})}\mathfrak{M},s\models f$$</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>A joke: A programmer walks into a bar, saying he has proved twin prime conjecture. All mathematicians are shocked and ask him how he could have done this. He says: &ldquo;I traverse all integers between 2 and 2,147,483,647.&rdquo;&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/Saul_Kripke">Saul Kripke</a> is a preeminent American philosopher who significantly impacted the fields of analytic philosophy and mathematical logic. I&rsquo;m interested in his works and may choose some to read and write on this blog.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Such checks can be achieved by formal methods which involve a labor-intensive process to <em>prove</em> the correctness of a program, or if you don&rsquo;t require a 100% guarantee, a multitude of software testing technologies. I will cover these topics on this blog in the future.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">Jun 18, 2022</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/">https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</a>
+    <a href="https://blog.cychen.xyz" class="p-name p-author post-hidden-author h-card" rel="me">Chuyang Chen</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+    
+
+    
+        
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Chuyang Chen, 2022<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto-without-switcher"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://blog.cychen.xyz class="p-name u-url url fn" rel="me">Chuyang Chen</a> 
+
+     
+        /
+        <a class="p-email u-email email" rel="me" href="mailto:chuyangchen2018@outlook.com">chuyangchen2018@outlook.com</a>
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

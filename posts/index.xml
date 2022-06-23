@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chuyang Chen&#39;s Blog</title>
-    <link>https://blog.cychen.xyz/</link>
-    <description>Chuyang Chen&#39;s Blog</description>
+    <title>Posts on Chuyang Chen&#39;s Blog</title>
+    <link>https://blog.cychen.xyz/posts/</link>
+    <description>Chuyang Chen&#39;s Blog (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 18 Jun 2022 10:37:28 +0800</lastBuildDate>
     
-    <atom:link href="https://blog.cychen.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.cychen.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -66,18 +66,6 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://blog.cychen.xyz/about/</link>
-      <pubDate>Fri, 10 Jun 2022 06:13:47 +0800</pubDate>
-      
-      <guid>https://blog.cychen.xyz/about/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m Chuyang Chen (陈楚阳), born in 1998, and currently an MSc student majoring in computer science at Nanjing University, Jiangsu, China. My main research area is software engineering, which aims to help people painlessly develop robust, secure, and maintainable software. I also have vast academic interests in other related fields in the discipline of computer science, such as theoretical computer science and programming languages. Besides academia, I&amp;rsquo;m a reader of sci-fi, pure literature, and philosophy books. Also, I may call myself a core gamer, though finding it harder and harder to allocate time to games. One of my favorite games nowadays is &lt;em&gt;Disco Elysium&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;To contact me, email &lt;a href=&#34;mailto:chuyangchen2018@outlook.com&#34;&gt;chuyangchen2018@outlook.com&lt;/a&gt;. For a more detailed and formal résumé, visit &lt;a href=&#34;https://info.cychen.xyz&#34;&gt;my homepage&lt;/a&gt; (still under construction, temporarily unavailable).&lt;/p&gt;
-&lt;p&gt;This blog is to record my reviews, remarks, and other thoughts during research and reading. It will focus on academic topics while possibly touching on other things I&amp;rsquo;m reading or working on. I hope to write mainly in English on technical subjects and in Chinese for other casual content. However, that&amp;rsquo;s not strict. It depends on my mood.&lt;/p&gt;
 </description>
     </item>
     
