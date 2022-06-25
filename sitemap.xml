@@ -2,7 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.cychen.xyz/categories/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
+  </url><url>
     <loc>https://blog.cychen.xyz/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.cychen.xyz/tags/mathematical-logic/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.cychen.xyz/tags/model-theory/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.cychen.xyz/categories/notes/</loc>
     <lastmod>2022-06-18T10:37:28+08:00</lastmod>
   </url><url>
     <loc>https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</loc>
@@ -11,11 +23,16 @@
     <loc>https://blog.cychen.xyz/posts/</loc>
     <lastmod>2022-06-18T10:37:28+08:00</lastmod>
   </url><url>
-    <loc>https://blog.cychen.xyz/about/</loc>
-    <lastmod>2022-06-10T06:13:47+08:00</lastmod>
+    <loc>https://blog.cychen.xyz/tags/software-testing/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
   </url><url>
-    <loc>https://blog.cychen.xyz/categories/</loc>
+    <loc>https://blog.cychen.xyz/tags/software-verification/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
   </url><url>
     <loc>https://blog.cychen.xyz/tags/</loc>
+    <lastmod>2022-06-18T10:37:28+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.cychen.xyz/about/</loc>
+    <lastmod>2022-06-10T06:13:47+08:00</lastmod>
   </url>
 </urlset>

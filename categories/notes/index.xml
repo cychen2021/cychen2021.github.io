@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>notes on Chuyang Chen&#39;s Blog</title>
+    <link>https://blog.cychen.xyz/categories/notes/</link>
+    <description>Chuyang Chen&#39;s Blog (notes)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jun 2022 10:37:28 +0800</lastBuildDate>
+    
+    <atom:link href="https://blog.cychen.xyz/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1</title>
+      <link>https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</link>
+      <pubDate>Sat, 18 Jun 2022 10:37:28 +0800</pubDate>
+      
+      <guid>https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</guid>
+      <description>&lt;p&gt;When I picked up Clarke et al.&amp;rsquo;s &lt;em&gt;Model Checking&lt;/em&gt;, I&amp;rsquo;d heard the name of model checking for a long. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in &lt;a href=&#34;https://en.wikipedia.org/wiki/Model_theory&#34;&gt;model theory&lt;/a&gt;, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.&lt;/p&gt;
+&lt;h2 id=&#34;a-glimpse-at-models-in-model-theory&#34; &gt;A Glimpse at Models in Model Theory
+&lt;span&gt;
+    &lt;a href=&#34;#a-glimpse-at-models-in-model-theory&#34;&gt;
+        &lt;svg viewBox=&#34;0 0 28 23&#34; height=&#34;100%&#34; width=&#34;19&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;path d=&#34;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;&lt;p&gt;Before introducing model checking, let&amp;rsquo;s have a glimpse at models in model theory. Informally, a model is an assignment to &lt;em&gt;vocabularies&lt;/em&gt; in a logical formula. It stipulates the &lt;em&gt;meaning&lt;/em&gt; of these vocabularies and thus the whole formula. We can only discuss the truth value of a logical formula respecting a model. For instance, suppose we have a first-order formula $$\forall v.(\mathrm{even}(v)\vee\mathrm{odd}(v))$$ Without further clarification, we don&amp;rsquo;t know what it means: for example, what can $v$ be? If the one who gives the formula details that $v$ can range in all natural numbers, then in this model, the formula is &amp;ldquo;true&amp;rdquo;; otherwise, if $v$ ranges in rational numbers, it is not true. If a model $\mathfrak{M}$ makes a formula $f$ true, we denote it as $\mathfrak{M}\models f$, read as &amp;ldquo;$\mathfrak{M}$ satisfies $f$&amp;rdquo; or &amp;ldquo;$\mathfrak{M}$ models $f$.&amp;rdquo;&lt;/p&gt;
+&lt;h2 id=&#34;from-model-theory-to-model-checking&#34; &gt;From Model Theory to Model Checking
+&lt;span&gt;
+    &lt;a href=&#34;#from-model-theory-to-model-checking&#34;&gt;
+        &lt;svg viewBox=&#34;0 0 28 23&#34; height=&#34;100%&#34; width=&#34;19&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;path d=&#34;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;&lt;p&gt;The relation between model theory and model checking is somewhat like the relation between economics and finance (I&amp;rsquo;m not a professional in business disciplines; let me know if you have any better analog). We can intuitively explain this analog by typical questions researchers of model theory and model checking may ask. A model theory researcher may ask: &amp;ldquo;Does there exist &lt;em&gt;any&lt;/em&gt; model satisfying this formula?&amp;rdquo;; a model checking researcher may ask: &amp;ldquo;Does this &lt;em&gt;specific&lt;/em&gt; model satisfy this formula?&amp;rdquo;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; In this article, we focus on the latter questions since the topic is about model checking.&lt;/p&gt;
+&lt;p&gt;But wait! Why do we need to do that? Why do we want to know whether one specific model satisfies a formula? It is because we don&amp;rsquo;t put any constraint on the elements in a model. Although, in the above example, elements the model contains are natural numbers or rational numbers, they don&amp;rsquo;t have to be such arithmetic objects. They can be, say, components of a computer program; in turn, the model represents a whole computer program. Also, we don&amp;rsquo;t put any constraints on the logic used to write the formula. It doesn&amp;rsquo;t have to be first-order logic but can be something more expressive. It can be &lt;a href=&#34;https://en.wikipedia.org/wiki/Temporal_logic&#34;&gt;temporal logic&lt;/a&gt; that can describe time. Now, look at what we have: we have a model representing a program and a formula describing time-dependent properties. Boom! We find a way to describe the behavior of a program: the model depicts the program, and the logical formula is the condition it must meet when running (when a program starts to run, its &lt;em&gt;time&lt;/em&gt; begins). When a model $\mathfrak{M}$ representing a program $\mathfrak{P}$ satisfies a formula $f$ describing a property $p$, we know that the program $\mathfrak{P}$ has the property $p$.&lt;/p&gt;
+&lt;h2 id=&#34;the-models-used-in-model-checking&#34; &gt;&lt;em&gt;The&lt;/em&gt; Models Used in Model Checking
+&lt;span&gt;
+    &lt;a href=&#34;#the-models-used-in-model-checking&#34;&gt;
+        &lt;svg viewBox=&#34;0 0 28 23&#34; height=&#34;100%&#34; width=&#34;19&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;&lt;path d=&#34;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;path d=&#34;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&#34; fill=&#34;none&#34; stroke-linecap=&#34;round&#34; stroke-miterlimit=&#34;10&#34; stroke-width=&#34;2&#34;/&gt;&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;&lt;p&gt;Model checking selects Kripke structures&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; among many choices to represent programs. A Kripke structure is an annotated directed graph that describes a &lt;em&gt;transition system&lt;/em&gt;, that is, a system with discrete states and transitions between these states. An example is as follows.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;1-1.svg&#34; alt=&#34;An example of Kripke structures&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The above Kripke structure has three states, $S_1$, $S_2$, and $S_3$, and four transitions, $S_1\rightarrow S_2$, $S_1\rightarrow S_3$, $S_2\rightarrow S_3$, and $S_3\rightarrow S_3$. $a$, $b$, and $c$ are attributes of the states on which the logical formula may make assertions. Possible execution of the system may be $S_1, S_2, S_3, S_3, &amp;hellip;$ Some important points of Kripke structures:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The number of states and transitions needs to be finite.&lt;/li&gt;
+&lt;li&gt;There can be multiple outedges from one state, giving Kripke structures the ability to handle &lt;a href=&#34;https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine&#34;&gt;nondeterminism&lt;/a&gt; naturally.&lt;/li&gt;
+&lt;li&gt;Some states should be marked as &lt;em&gt;initial states&lt;/em&gt; (characterized by an inedge without a tail), from which the system&amp;rsquo;s execution begins. In the above example, $S_1$ is the only initial state.&lt;/li&gt;
+&lt;li&gt;There can be self-loops, where a state has an outedge pointing itself. In a self-loop, the system may stay in the self-looped state forever.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Moreover, model checking imposes an extra constraint on the Kripke structures: every state must have at least one outedge. It means that once the system starts executing, it can never stop. One can easily modify a Kripke structure with &lt;em&gt;halt states&lt;/em&gt; (states with no outedges, so the execution can only halt) to this form by just adding self-loops to all halt states.&lt;/p&gt;
+&lt;p&gt;Characteristics of Kripke structures restrict the ability of model checking: model checking cannot check any program with infinite states&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, for example, programs dealing with variable-length strings. However, this is a sensible trade-off between the expressiveness and the simplicity of computing: no computer can represent an arbitrary infinite graph, let alone calculate assertions on it.&lt;/p&gt;
+&lt;p&gt;Hitherto, we have given a synopsis of the concepts of models in model theory and model checking. In the next post, we will touch on another core concept in model checking—the left-hand side of the notation $\mathfrak{M}\models f$—logical formulas in model checking.&lt;/p&gt;
+&lt;p&gt;However, before we conclude this post, we have to supplement a slight difference between &lt;em&gt;the&lt;/em&gt; models in model checking and models in model theory: the former cannot be strictly subsumed into the latter. As to be detailed in the next post, logical formulas in model checking can only assert properties upon a &lt;em&gt;state&lt;/em&gt;. We cannot say $\mathfrak{M}\models f$, but instead $\mathfrak{M},s\models f$, where $\mathfrak{M}$ is a Kripke structure, $f$ is a formula, and $s$ is a state of $\mathfrak{M}$. That means the equivalent of models in model theory in model checking is Kripke structures plus one of their states. Still, for conventional reasons, researchers of model checking simply refer to Kripke structures as &amp;ldquo;models,&amp;rdquo; and we will follow this convention hereafter. Typically, we only check the initial states of a Kripke structure against some formula $f$ because all successive states of these initial states can be specified by this formula through temporal quantifiers. The unreachable states from the initial states do not affect the system&amp;rsquo;s actual behavior. So, you will see a lot of seemingly model theory equations $\mathfrak{M}\models f$ in model checking, while according to the preceding paragraph, it is illegal in model theory. Remember, in model checking, such an equation is just an abbreviation of $$\bigwedge_{s\in\mathrm{initialStatesOf}(\mathfrak{M})}\mathfrak{M},s\models f$$&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;A joke: A programmer walks into a bar, saying he has proved twin prime conjecture. All mathematicians are shocked and ask him how he could have done this. He says: &amp;ldquo;I traverse all integers between 2 and 2,147,483,647.&amp;rdquo;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Saul_Kripke&#34;&gt;Saul Kripke&lt;/a&gt; is a preeminent American philosopher who significantly impacted the fields of analytic philosophy and mathematical logic. I&amp;rsquo;m interested in his works and may choose some to read and write on this blog.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;Such checks can be achieved by formal methods which involve a labor-intensive process to &lt;em&gt;prove&lt;/em&gt; the correctness of a program, or if you don&amp;rsquo;t require a 100% guarantee, a multitude of software testing technologies. I will cover these topics on this blog in the future.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
