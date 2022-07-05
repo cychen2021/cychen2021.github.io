@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1</title>
+      <title>Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1: Kripke Structure</title>
       <link>https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</link>
       <pubDate>Sat, 18 Jun 2022 10:37:28 +0800</pubDate>
       
       <guid>https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/</guid>
-      <description>&lt;p&gt;When I picked up Clarke et al.&amp;rsquo;s &lt;em&gt;Model Checking&lt;/em&gt;, I&amp;rsquo;d heard the name of model checking for a long. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in &lt;a href=&#34;https://en.wikipedia.org/wiki/Model_theory&#34;&gt;model theory&lt;/a&gt;, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.&lt;/p&gt;
+      <description>&lt;p&gt;When I picked up Clarke et al.&amp;rsquo;s &lt;em&gt;Model Checking&lt;/em&gt;, I&amp;rsquo;d heard the name of model checking for a long time. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in &lt;a href=&#34;https://en.wikipedia.org/wiki/Model_theory&#34;&gt;model theory&lt;/a&gt;, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.&lt;/p&gt;
 &lt;h2 id=&#34;a-glimpse-at-models-in-model-theory&#34; &gt;A Glimpse at Models in Model Theory
 &lt;span&gt;
     &lt;a href=&#34;#a-glimpse-at-models-in-model-theory&#34;&gt;

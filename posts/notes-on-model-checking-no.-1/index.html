@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>Notes on Model Checking, No. 1 - Chuyang Chen&#39;s Blog</title>
+<title>Notes on Model Checking, No. 1: Kripke Structure - Chuyang Chen&#39;s Blog</title>
 
 <meta name="description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking.">
 
@@ -84,7 +84,7 @@
 
 
 
-<meta property="og:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1" />
+<meta property="og:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1: Kripke Structure" />
 <meta property="og:description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.cychen.xyz/posts/notes-on-model-checking-no.-1/" /><meta property="article:section" content="posts" />
@@ -93,7 +93,7 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1"/>
+<meta name="twitter:title" content="Notes on &lt;i&gt;Model Checking&lt;/i&gt;, No. 1: Kripke Structure"/>
 <meta name="twitter:description" content="These are the notes I take on Clarke et al.&rsquo;s Model Checking. I haven&rsquo;t finished reading the book yet, so there will be more posts about it (and that&rsquo;s why I assign a number in the title). In the first post, I introduce some basic concepts from model theory and briefly describe the models used in model checking."/>
 
 
@@ -177,13 +177,13 @@
     <article class="post h-entry">
         <div class="post-header">
             <header>
-                <h1 class="p-name post-title draft">Notes on <i>Model Checking</i>, No. 1</h1>
+                <h1 class="p-name post-title">Notes on <i>Model Checking</i>, No. 1: Kripke Structure</h1>
 
                 
             </header>
         </div>
         <div class="content e-content">
-            <p>When I picked up Clarke et al.&rsquo;s <em>Model Checking</em>, I&rsquo;d heard the name of model checking for a long. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in <a href="https://en.wikipedia.org/wiki/Model_theory">model theory</a>, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.</p>
+            <p>When I picked up Clarke et al.&rsquo;s <em>Model Checking</em>, I&rsquo;d heard the name of model checking for a long time. It appears everywhere in papers concerning software testing as a foundation of other methods. However, I could never figure out what the term stands for. I knew models in <a href="https://en.wikipedia.org/wiki/Model_theory">model theory</a>, but how could they use it to verify a computer program? Do they model a program as a model and write logic assertions on it? We will find that this is indeed what they do.</p>
 <h2 id="a-glimpse-at-models-in-model-theory" >A Glimpse at Models in Model Theory
 <span>
     <a href="#a-glimpse-at-models-in-model-theory">
